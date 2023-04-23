@@ -42,3 +42,5 @@ run `go run cmd/test-api.go` in the container.
 ### Check in browser
 
 http://localhost:8080/swagger/index.html
+
+### Test CI
