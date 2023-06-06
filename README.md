@@ -54,7 +54,7 @@ run `go run cmd/test-api.go` in the container.
 `migrate -database "mysql://${username}:${password}@tcp${MYSQL_URL}/${DB_NAME}" -path db/migrations down ${BATCH}`
 
 ## Api document
-
+asfasf
 asfasf### Generate document
 
 `swag init -g cmd/main.go`
