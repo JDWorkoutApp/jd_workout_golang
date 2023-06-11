@@ -152,13 +152,16 @@ func groupByRecord(data []repo.RecordByDate) []dateGroup {
 			group[len(group)-1].Equips[len(group[len(group)-1].Equips)-1].Records = recordList
 		}
 
-		record := &group[len(group)-1].
-			Equips[len(group[len(group)-1].Equips)-1].
-			Records[len(group[len(group)-1].Equips[len(group[len(group)-1].Equips)-1].Records)-1]
-
-		record.IDS = append(record.IDS, v.ID)
-		record.Sets += int(1)
-		record.Note = append(record.Note, v.Note)
+		lastGroup := group[len(group)-1]
+		lastEquip := lastGroup.Equips[len(lastGroup.Equips)-1]
+		// todo: len shouldn't be 0, but mapping has bug, try to fix or refactor this function
+		if len(lastEquip.Records) != 0 {
+			lastRecord := lastEquip.Records[len(lastEquip.Records)-1]
+			record := &lastRecord
+			record.IDS = append(record.IDS, v.ID)
+			record.Sets += int(1)
+			record.Note = append(record.Note, v.Note)
+		}
 	}
 
 	return group
