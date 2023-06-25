@@ -1,8 +1,9 @@
 package equip
 
 import (
+	"encoding/json"
+	"gorm.io/gorm"
 	"jd_workout_golang/app/middleware"
-	"jd_workout_golang/app/models"
 	repo "jd_workout_golang/app/repositories/equip"
 	fsRepo "jd_workout_golang/app/repositories/file"
 	recordRepo "jd_workout_golang/app/repositories/record"
@@ -26,10 +27,22 @@ type equipListResponse struct {
 }
 
 type equipExpand struct {
-	models.Equip    `json:"equip"`
+	apiFormatEquip  `json:"equip"`
 	MaxWeightRecord maxWeightRecord     `json:"maxWeightRecord"`
 	MaxVolumeRecord lastMaxWeightRecord `json:"maxVolumeRecord"`
 	LastRecords     []recentRecord      `json:"lastRecords"`
+}
+
+type apiFormatEquip struct {
+	ID        uint           `json:"id" gorm:"primarykey"`
+	CreatedAt time.Time      `json:"createdAt"`
+	UpdatedAt time.Time      `json:"updatedAt"`
+	DeletedAt gorm.DeletedAt `json:"-" gorm:"index"`
+	UserId    uint           `json:"userId"`
+	Name      string         `json:"name"`
+	Weights   []float32      `json:"weights" gorm:"default:null"`
+	Note      *string        `json:"note" gorm:"default:null"`
+	Image     *string        `json:"image" gorm:"default:null"`
 }
 
 type maxWeightRecord struct {
@@ -134,8 +147,25 @@ func List(c *gin.Context) {
 		}
 		v.Image = file.GetPath()
 
+		arrayWeights := []float32{}
+		if err := json.Unmarshal([]byte(*v.Weights), &arrayWeights); err != nil {
+			arrayWeights = []float32{}
+		}
+
+		apiFormatEquip := apiFormatEquip{
+			ID:        v.ID,
+			CreatedAt: v.CreatedAt,
+			UpdatedAt: v.UpdatedAt,
+			DeletedAt: v.DeletedAt,
+			UserId:    v.UserId,
+			Name:      v.Name,
+			Weights:   arrayWeights,
+			Note:      v.Note,
+			Image:     v.Image,
+		}
+
 		equipData = append(equipData, equipExpand{
-			Equip: v,
+			apiFormatEquip: apiFormatEquip,
 			MaxWeightRecord: maxWeightRecord{
 				ID:        hash[v.ID].ID,
 				Weight:    hash[v.ID].Weight,
