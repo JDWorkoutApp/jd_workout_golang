@@ -855,11 +855,43 @@ const docTemplate = `{
                 }
             }
         },
+        "equip.apiFormatEquip": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "integer"
+                },
+                "weights": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
         "equip.equipExpand": {
             "type": "object",
             "properties": {
                 "equip": {
-                    "$ref": "#/definitions/models.Equip"
+                    "$ref": "#/definitions/equip.apiFormatEquip"
                 },
                 "lastRecords": {
                     "type": "array",
@@ -972,35 +1004,6 @@ const docTemplate = `{
                 }
             }
         },
-        "models.Equip": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "image": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "note": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                },
-                "userId": {
-                    "type": "integer"
-                },
-                "weights": {
-                    "type": "string"
-                }
-            }
-        },
         "record.createBody": {
             "type": "object",
             "required": [
@@ -1085,6 +1088,9 @@ const docTemplate = `{
             "properties": {
                 "id": {
                     "type": "integer"
+                },
+                "image": {
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"

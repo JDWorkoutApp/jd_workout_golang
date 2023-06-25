@@ -39,10 +39,31 @@ definitions:
     - password
     - username
     type: object
+  equip.apiFormatEquip:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      image:
+        type: string
+      name:
+        type: string
+      note:
+        type: string
+      updatedAt:
+        type: string
+      userId:
+        type: integer
+      weights:
+        items:
+          type: number
+        type: array
+    type: object
   equip.equipExpand:
     properties:
       equip:
-        $ref: '#/definitions/models.Equip'
+        $ref: '#/definitions/equip.apiFormatEquip'
       lastRecords:
         items:
           $ref: '#/definitions/equip.recentRecord'
@@ -115,25 +136,6 @@ definitions:
     required:
     - weights
     type: object
-  models.Equip:
-    properties:
-      createdAt:
-        type: string
-      id:
-        type: integer
-      image:
-        type: string
-      name:
-        type: string
-      note:
-        type: string
-      updatedAt:
-        type: string
-      userId:
-        type: integer
-      weights:
-        type: string
-    type: object
   record.createBody:
     properties:
       equip_id:
@@ -190,6 +192,8 @@ definitions:
     properties:
       id:
         type: integer
+      image:
+        type: string
       name:
         type: string
       note:
