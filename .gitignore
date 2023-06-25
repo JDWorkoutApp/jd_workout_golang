@@ -5,3 +5,4 @@
 /.devcontainer
 logfile.log
 /public/images
+bat/when_changed.exe
