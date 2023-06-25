@@ -31,6 +31,10 @@ http://www.govel-workout.com:6002/
 
 use command `air`
 
+Have issue with windows + docker. 
+
+[Issue and solution](https://github.com/cosmtrek/air/issues/190)
+
 ### test api Hot reload
 
 run `air -c .air_test.toml`
