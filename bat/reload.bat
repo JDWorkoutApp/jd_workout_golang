@@ -1,0 +1,1 @@
+ docker exec jd_workout_golang-app-1 bash/reload.bash

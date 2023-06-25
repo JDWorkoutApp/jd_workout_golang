@@ -31,6 +31,33 @@ http://www.govel-workout.com:6002/
 
 use command `air`
 
+Have issue with windows + docker. 
+
+[Issue and solution](https://github.com/cosmtrek/air/issues/190)
+
+## Windows hot reload (Docker)
+
+Solution that replace air.
+
+[Install](https://github.com/benblamey/when_changed/releases/) this, 
+and put in `bat\when_changed.exe`
+
+run command in root folder: `bat\when_changed.exe  ./**.go  bat\reload.bat`
+
+> Don't use git bash if it not work as you think.
+
+**Dev routine**
+
+* `docker-compose up -d`
+* In app container: `./bash/main.bash`
+  * This command will run `go run cmd/main.go` and restart if session get killed.
+* In windows cmd run `bat\when_changed.exe  ./**.go  bat\reload.bat`
+  * `when_changed.exe` download from gitHub mentioned above.
+  * `./**.go` listen all go file change.
+  * run `bat\reload.bat` when ever file change.
+* `bat\reload.bat` will execute `bash\reload.bash` in container.
+* `bash\reload.bash` will kill `go run cmd/main.go` and run `go run cmd/main.go` again through `./bash/main.bash` we run before.
+
 ### test api Hot reload
 
 run `air -c .air_test.toml`

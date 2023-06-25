@@ -1,6 +1,8 @@
-FROM golang:latest
+FROM golang:1.20
 
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y lsof vim
 
 RUN go install github.com/cosmtrek/air@latest
 
