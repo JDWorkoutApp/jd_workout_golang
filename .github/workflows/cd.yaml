@@ -5,7 +5,7 @@ on:
     branches:
       - dev
 jobs:
-  test:
+  push-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -37,6 +37,9 @@ jobs:
           registry: ghcr.io
           dockerfile: ./docker/redis/DockerfileCI
           tags: latest
+  pull-image:
+    runs-on: ubuntu-latest
+    steps:
       - name: Pull image and deploy, and migrate
         uses: appleboy/ssh-action@v0.1.8
         with:
