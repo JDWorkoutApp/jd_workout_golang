@@ -38,6 +38,7 @@ jobs:
           dockerfile: ./docker/redis/DockerfileCI
           tags: latest
   pull-image:
+    needs: push-image
     runs-on: ubuntu-latest
     steps:
       - name: Pull image and deploy, and migrate
