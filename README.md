@@ -10,9 +10,7 @@ Can't afford the fee. :hankey: :hankey: :hankey:
 
 ## Online API document
 
-### Dev
-
-http://www.govel-workout.com:6003/swagger/index.html
+### Dev (private)
 
 ### Prod
 
