@@ -147,9 +147,9 @@ func List(c *gin.Context) {
 		}
 		v.Image = file.GetPath()
 
-		arrayWeights := []float32{}
-		if err := json.Unmarshal([]byte(*v.Weights), &arrayWeights); err != nil {
-			arrayWeights = []float32{}
+		var arrayWeights []float32
+		if v.Weights != nil {
+			json.Unmarshal([]byte(*v.Weights), &arrayWeights)
 		}
 
 		apiFormatEquip := apiFormatEquip{
