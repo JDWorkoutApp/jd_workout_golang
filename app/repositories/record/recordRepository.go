@@ -105,11 +105,12 @@ func GetDateSummaryRecords(page pageinate.PaginateCondition, uid uint) (*[]Recor
 
 type RecordWithVolumn struct {
 	models.Record
-	Ids    string  `json:"ids"`
-	Volumn float32 `json:"volumn"`
-	Date   string  `json:"date"`
-	Count  int     `json:"sets"`
-	Notes  string  `json:"notes"`
+	Ids       string  `json:"ids"`
+	Volumn    float32 `json:"volumn"`
+	Date      string  `json:"date"`
+	Count     int     `json:"sets"`
+	Notes     string  `json:"notes"`
+	CreatedAt string  `json:"created_at"`
 }
 
 func GetMaxRecord(equips []uint, before string) *[]RecordWithVolumn {
@@ -138,7 +139,7 @@ func GetRecentRecord(equips []uint) *[]RecordWithVolumn {
 	db.Connection.Model(models.Record{}).
 		Select("group_concat(records.id) as ids, records.weight, records.reps, records.equip_id, group_concat(records.note) as notes, "+
 			// "row_number() over (partition by equip_id order by date_format(created_at, '%Y-%m-%d')) as row_num,"+
-			"date_format(created_at, '%Y-%m-%d') as date, count(1) as count",
+			"date_format(created_at, '%Y-%m-%d') as date, count(1) as count, created_at",
 		).
 		Where("records.created_at >= ?", time.Now().AddDate(0, 0, -7).Format("2006-01-02")).
 		Group("equip_id, weight, reps, date_format(created_at, '%Y-%m-%d')").
