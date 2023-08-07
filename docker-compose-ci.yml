@@ -10,6 +10,7 @@ services:
     volumes:
       - ./.env:/app/.env
       - ./credentials.json:/app/credential/google/credentials.json
+      - ./public/images:/app/public/images
     environment:
       WAIT_HOSTS: mysql:3306
         - GO111MODULE=on
