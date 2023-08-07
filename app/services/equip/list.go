@@ -141,7 +141,8 @@ func List(c *gin.Context) {
 			Note:   strings.Split(v.Notes, ","),
 		})
 
-		equipLatestDateTime[v.EquipId] = &v.CreatedAt
+		createdAtCopy := v.CreatedAt
+		equipLatestDateTime[v.EquipId] = &createdAtCopy
 	}
 
 	equipData := []equipExpand{}
