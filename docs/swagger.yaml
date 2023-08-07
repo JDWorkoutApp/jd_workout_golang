@@ -68,6 +68,8 @@ definitions:
         items:
           $ref: '#/definitions/equip.recentRecord'
         type: array
+      lastUsed:
+        type: string
       maxVolumeRecord:
         $ref: '#/definitions/equip.lastMaxWeightRecord'
       maxWeightRecord:
