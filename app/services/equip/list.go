@@ -31,6 +31,7 @@ type equipExpand struct {
 	MaxWeightRecord maxWeightRecord     `json:"maxWeightRecord"`
 	MaxVolumeRecord lastMaxWeightRecord `json:"maxVolumeRecord"`
 	LastRecords     []recentRecord      `json:"lastRecords"`
+	LastUsedAt      *string             `json:"lastUsed"`
 }
 
 type apiFormatEquip struct {
@@ -121,6 +122,7 @@ func List(c *gin.Context) {
 
 	recent := recordRepo.GetRecentRecord(ids)
 	recentHash := map[uint][]recentRecord{}
+	equipLatestDateTime := make(map[uint]*string)
 	for _, v := range *recent {
 		idStrings := strings.Split(v.Ids, ",")
 		recordIds := make([]uint, 0)
@@ -138,6 +140,9 @@ func List(c *gin.Context) {
 			Volume: v.Weight * float32(v.Reps) * float32(v.Count),
 			Note:   strings.Split(v.Notes, ","),
 		})
+
+		createdAtCopy := v.CreatedAt
+		equipLatestDateTime[v.EquipId] = &createdAtCopy
 	}
 
 	equipData := []equipExpand{}
@@ -147,9 +152,9 @@ func List(c *gin.Context) {
 		}
 		v.Image = file.GetPath()
 
-		arrayWeights := []float32{}
-		if err := json.Unmarshal([]byte(*v.Weights), &arrayWeights); err != nil {
-			arrayWeights = []float32{}
+		var arrayWeights []float32
+		if v.Weights != nil {
+			json.Unmarshal([]byte(*v.Weights), &arrayWeights)
 		}
 
 		apiFormatEquip := apiFormatEquip{
@@ -179,6 +184,7 @@ func List(c *gin.Context) {
 				DayVolume:     float32(lastHash[v.ID].Volumn),
 			},
 			LastRecords: recentHash[v.ID],
+			LastUsedAt:  equipLatestDateTime[v.ID],
 		})
 	}
 

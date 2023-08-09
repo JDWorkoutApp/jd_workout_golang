@@ -10,9 +10,7 @@ Can't afford the fee. :hankey: :hankey: :hankey:
 
 ## Online API document
 
-### Dev
-
-http://www.govel-workout.com:6003/swagger/index.html
+### Dev (private)
 
 ### Prod
 
@@ -42,9 +40,10 @@ Solution that replace air.
 [Install](https://github.com/benblamey/when_changed/releases/) this, 
 and put in `bat\when_changed.exe`
 
-run command in root folder: `bat\when_changed.exe  ./**.go  bat\reload.bat`
-
-> Don't use git bash if it not work as you think.
+1. run command in container: `./bash/main.bash`
+2. run command in windows (project root folder): `bat\when_changed.exe  ./**.go  bat\reload.bat`
+    > Don't use git bash if it not work as you think.
+3. `main.go` should reload when ever you change any go file.
 
 **Dev routine**
 

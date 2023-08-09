@@ -61,9 +61,6 @@ func init() {
 
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
-
-	r.Static("/images", "./public/images")
-
 	if os.Getenv("API_RATE_ON") == "true" {
 		r.Use(middleware.ApiRateLimit)
 	}
@@ -71,6 +68,7 @@ func SetupRouter() *gin.Engine {
 	r.Use(middleware.Cors())
 	r.Use(middleware.FailResponseAlert())
 
+	r.Static("/images", "./public/images")
 	r.GET("/verify-email", authAction.VerifyEmail)
 
 	// 註冊 router group

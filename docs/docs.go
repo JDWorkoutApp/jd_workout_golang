@@ -899,6 +899,9 @@ const docTemplate = `{
                         "$ref": "#/definitions/equip.recentRecord"
                     }
                 },
+                "lastUsed": {
+                    "type": "string"
+                },
                 "maxVolumeRecord": {
                     "$ref": "#/definitions/equip.lastMaxWeightRecord"
                 },
