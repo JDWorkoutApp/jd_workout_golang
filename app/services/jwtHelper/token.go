@@ -38,7 +38,7 @@ func GenerateToken(u *models.User) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"uid":          u.ID,
 		"restPassword": u.ResetPassword,
-		"exp":          time.Now().Add(time.Hour * 24).Unix(),
+		"exp":          time.Now().Add(time.Hour * 240).Unix(),
 	})
 
 	return token.SignedString([]byte(os.Getenv("APP_KEY")))
