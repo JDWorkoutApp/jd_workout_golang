@@ -16,7 +16,7 @@ services:
       context: .
       dockerfile: ./docker/mysql/DockerfileDev
     ports:
-      - "3306:3306"
+      - "${DB_PORT:-3306}:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
@@ -29,7 +29,7 @@ services:
       context: .
       dockerfile: ./docker/redis/DockerfileDev
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT:-6379}:6379"
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD:-password}
     volumes:
