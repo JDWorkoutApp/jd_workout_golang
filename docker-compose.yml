@@ -12,18 +12,21 @@ services:
     volumes:
       - ./:/app
   mysql:
-    build:
-      context: .
-      dockerfile: ./docker/mysql/DockerfileDev
-    ports:
-      - "${DB_PORT:-3306}:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: jd_workout
-      MYSQL_USER: test
-      MYSQL_PASSWORD: test
+      build:
+        context: .
+        dockerfile: ./docker/mysql/DockerfileDev
+      ports:
+        - "${DB_PORT:-3306}:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: "${MYSQL_PASSWORD}"
+        MYSQL_ROOT_HOST: "%"
+        MYSQL_DATABASE: jd_workout
+        MYSQL_USER: "${MYSQL_USER}"
+        MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+        MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        TZ: Asia/Taipei
+      volumes:
+          - 'mysql_data:/var/lib/mysql'
   redis:
     build:
       context: .
