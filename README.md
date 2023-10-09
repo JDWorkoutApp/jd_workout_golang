@@ -25,6 +25,20 @@ http://www.govel-workout.com:6002/
 * `docker-compose build`
 * `docker-compose up -d`
 
+## Test, swagger, lint
+
+Check command in `Makefile`.
+
+## Bash rc for dev
+
+```bash
+alias wolint="docker exec dev_workout_lint_1 golangci-lint run"
+alias woswagger="docker exec dev_workout_app_1 swag init -g cmd/main.go"
+alias wobash="docker exec -it dev_workout_app_1 bash"
+alias wotest="docker exec dev_workout_app_1 make test"
+alias woair="docker exec dev_workout_app_1 sh -c 'kill \$(lsof -t -i :80) && air'"
+```
+
 ## Hot reload
 
 use command `air`
