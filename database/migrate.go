@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	migrate "github.com/govel-golang-migration/govel-golang-migration"
 	"jd_workout_golang/lib/database"
 	"jd_workout_golang/lib/file"
 	"os"
 	"strconv"
 	"strings"
-	migrate "github.com/govel-golang-migration/govel-golang-migration"
 )
 
 func main() {
@@ -32,6 +32,10 @@ func dispatch(method string) {
 	rebuild, _ := strconv.ParseBool(os.Getenv("REBUILD"))
 
 	switch method {
+	case "status":
+		fmt.Println("status ...")
+
+		migrate.Status(os.Getenv("DB_HOST"), migrationPath)
 	case "install":
 		fmt.Println("install ...")
 
