@@ -13,10 +13,20 @@ type Equip struct {
 	Note    string `gorm:"type:varchar(255)"`
 }
 
-func UpCreateEquipTable() {
-	database.Connection.Migrator().CreateTable(&Equip{})
+func UpCreateEquipTable() error {
+	err := database.Connection.Migrator().CreateTable(&Equip{})
+	if err != nil {
+		return err
+	}
+	
+	return nil
 }
 
-func DownCreateEquipTable() {
-	database.Connection.Migrator().DropTable(&Equip{})
+func DownCreateEquipTable() error {
+	err := database.Connection.Migrator().DropTable(&Equip{})
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

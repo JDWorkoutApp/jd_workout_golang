@@ -1,8 +1,8 @@
 package main
 
 import (
-	"jd_workout_golang/lib/database"
 	"gorm.io/gorm"
+	"jd_workout_golang/lib/database"
 )
 
 type User struct {
@@ -12,10 +12,20 @@ type User struct {
 	Username string `gorm:"type:varchar(255)"`
 }
 
-func UpCreateUsersTable() {
-	database.Connection.Migrator().CreateTable(&User{})
+func UpCreateUsersTable() error {
+	err := database.Connection.Migrator().CreateTable(&User{})
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func DownCreateUsersTable() {
-	database.Connection.Migrator().DropTable(&User{})
+func DownCreateUsersTable() error {
+	err := database.Connection.Migrator().DropTable(&User{})
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/getsentry/sentry-go"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
@@ -50,7 +51,12 @@ func main() {
 	r := SetupRouter()
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	r.Run(":80") // listen and serve on
+	err := r.Run(":80")
+
+	if err != nil {
+		fmt.Println("Init server error")
+		log.Fatal(err)
+	}
 }
 
 func init() {

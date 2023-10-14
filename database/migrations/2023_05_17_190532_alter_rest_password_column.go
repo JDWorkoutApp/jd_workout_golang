@@ -5,10 +5,20 @@ import (
 	"jd_workout_golang/lib/database"
 )
 
-func UpAlterRestPasswordColumn() {
-	database.Connection.Migrator().AlterColumn(&models.User{}, "ResetPassword")
+func UpAlterRestPasswordColumn() error {
+	err := database.Connection.Migrator().AlterColumn(&models.User{}, "ResetPassword")
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func DownAlterRestPasswordColumn() {
-	database.Connection.Migrator().AlterColumn(&models.User{}, "ResetPassword")
+func DownAlterRestPasswordColumn() error {
+	err := database.Connection.Migrator().AlterColumn(&models.User{}, "ResetPassword")
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
