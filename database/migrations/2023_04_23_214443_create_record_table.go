@@ -15,10 +15,20 @@ type Record struct {
 	Note string `json:"note" gorm:"default:null"`
 }
 
-func UpCreateRecordTable() {
-	database.Connection.Migrator().CreateTable(&Record{})
+func UpCreateRecordTable() error {
+	err := database.Connection.Migrator().CreateTable(&Record{})
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func DownCreateRecordTable() {
-	database.Connection.Migrator().DropTable(&Record{})
+func DownCreateRecordTable() error {
+	err := database.Connection.Migrator().DropTable(&Record{})
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

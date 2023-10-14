@@ -6,10 +6,20 @@ import (
 )
 
 
-func UpAddImageToEuqipTable() {
-	database.Connection.Migrator().AddColumn(&models.Equip{}, "Image")
+func UpAddImageToEuqipTable() error {
+	err := database.Connection.Migrator().AddColumn(&models.Equip{}, "Image")
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func DownAddImageToEuqipTable() {
-	database.Connection.Migrator().DropColumn(&models.Equip{}, "Image")
+func DownAddImageToEuqipTable() error {
+	err := database.Connection.Migrator().DropColumn(&models.Equip{}, "Image")
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
