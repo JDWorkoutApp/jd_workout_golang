@@ -24,6 +24,7 @@ func main() {
 }
 
 var migrationPath = "database"
+var rebuild = false
 
 func dispatch(method string) {
 	fmt.Printf("dispatch %s method \n", method)
