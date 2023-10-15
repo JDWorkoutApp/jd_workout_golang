@@ -20,7 +20,7 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           version: v1.54
-          args: --timeout=30m --issues-exit-code=0 --config='./.github/workflows/ci.yaml'
+          args: --timeout=30m --issues-exit-code=0 --config='./.github/workflows/ci.yaml' --out-format=checkstyle:golangci-lint-report.xml
   test:
     runs-on: ubuntu-latest
     steps:
@@ -36,6 +36,3 @@ jobs:
            file: ./coverage.out
            fail_ci_if_error: true
            verbose: true
-output:
-  print-issued-lines: true
-  print-linter-name: true
