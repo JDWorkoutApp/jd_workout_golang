@@ -87,11 +87,7 @@ func validateRegister(u *models.User, db *gorm.DB) bool {
 	result := db.Where("email = ?", u.Email).First(&u)
 
 	// duplicate email
-	if result.RowsAffected == 1 {
-		return false
-	}
-
-	return true
+	return result.RowsAffected != 1
 }
 
 func storeUser(u *models.User, db *gorm.DB) *models.User {

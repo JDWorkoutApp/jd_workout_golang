@@ -181,7 +181,10 @@ func bindUserWithThirdPartyAccount(thirdPartyInfo *google.UserInfo, user *models
 		user.Email = thirdPartyInfo.Email
 		user.EmailVerified = 1
 
-		repo.Create(user)
+		err := repo.Create(user)
+		if err != nil {
+			return 
+		}
 
 		return
 	}
@@ -190,7 +193,10 @@ func bindUserWithThirdPartyAccount(thirdPartyInfo *google.UserInfo, user *models
 	if user.ID != 0 && user.EmailVerified != 1 {
 		user.EmailVerified = 1
 
-		repo.Update(user)
+		err := repo.Update(user)
+		if err != nil {
+			return 
+		}
 
 		return
 	}

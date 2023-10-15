@@ -90,7 +90,17 @@ func UpdateEquip(c *gin.Context) {
 
 	equip.Image = path
 
-	repo.Update(equip)
+	err = repo.Update(equip)
+	if err != nil {
+		c.JSON(422, gin.H{
+			"message": "update error",
+			"error":   err.Error(),
+		})
+
+		c.Abort()
+
+		return
+	}
 
 	c.JSON(200, gin.H{
 		"message": "equip updated",
