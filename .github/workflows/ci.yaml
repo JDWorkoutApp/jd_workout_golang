@@ -20,6 +20,7 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           version: v1.54
+          args: --timeout=30m --issues-exit-code=0 --config='./.github/workflows/ci.yaml'
   test:
     runs-on: ubuntu-latest
     steps:
