@@ -21,9 +21,7 @@ jobs:
         with:
           version: v1.54
           args: --timeout=30m --issues-exit-code=0 --config='./.github/workflows/ci.yaml'
-          working-directory: './'
-          skip-cache: true
-          skip-build-cache: true
+          fail_ci_if_error: true
   test:
     runs-on: ubuntu-latest
     steps:
