@@ -1,3 +1,8 @@
+## Project phases
+
+1. [x] Workout app
+2. [ ] General purpose app
+
 ## Android Play Store
 
 [Link](https://play.google.com/store/apps/details?id=com.govel.workout&hl=zh-TW)

@@ -82,7 +82,7 @@ func UpdateRecord(c *gin.Context) {
 	record.Reps = updateBody.Reps
 	record.Note = updateBody.Note
 
-	recordRepo.Update(record)
+	err = recordRepo.Update(record)
 
 	if err != nil {
 		c.JSON(422, gin.H{

@@ -48,7 +48,21 @@ func DeleteEquip(c *gin.Context) {
 		return
 	}
 
-	repo.Delete(equip)
+	err = repo.Delete(equip)
+	if err != nil {
+		return
+	}
+
+	if err != nil {
+		c.JSON(422, gin.H{
+			"message": "equip delete error",
+			"error":   err.Error(),
+		})
+
+		c.Abort()
+
+		return
+	}
 
 	c.JSON(200, gin.H{
 		"message": "equip deleted",

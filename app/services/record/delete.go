@@ -1,10 +1,10 @@
 package record
 
 import (
+	"github.com/gin-gonic/gin"
 	"jd_workout_golang/app/middleware"
 	recordRepo "jd_workout_golang/app/repositories/record"
 	"strconv"
-	"github.com/gin-gonic/gin"
 )
 
 // delete record
@@ -45,7 +45,7 @@ func DeleteRecord(c *gin.Context) {
 		return
 	}
 
-	recordRepo.Delete(record)
+	err = recordRepo.Delete(record)
 
 	if err != nil {
 		c.JSON(422, gin.H{

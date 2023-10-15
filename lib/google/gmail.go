@@ -5,14 +5,14 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	fileLib "jd_workout_golang/lib/file"
-	"log"
-	"net/http"
-	"os"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/gmail/v1"
 	"google.golang.org/api/option"
+	fileLib "jd_workout_golang/lib/file"
+	"log"
+	"net/http"
+	"os"
 )
 
 func getClient(config *oauth2.Config) *http.Client {
@@ -39,7 +39,10 @@ func saveToken(path string, token *oauth2.Token) {
 
 	defer f.Close()
 
-	json.NewEncoder(f).Encode(token)
+	err = json.NewEncoder(f).Encode(token)
+	if err != nil {
+		return
+	}
 }
 
 func getAbsPath(file string) string {

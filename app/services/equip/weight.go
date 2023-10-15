@@ -2,10 +2,10 @@ package equip
 
 import (
 	"encoding/json"
-	"jd_workout_golang/app/middleware"
-	"strconv"
-	repo "jd_workout_golang/app/repositories/equip"
 	"github.com/gin-gonic/gin"
+	"jd_workout_golang/app/middleware"
+	repo "jd_workout_golang/app/repositories/equip"
+	"strconv"
 )
 
 type weightForm struct {
@@ -70,7 +70,10 @@ func UpdateWeight(c *gin.Context) {
 	jsonPtr := string(json)
 	equip.Weights = &jsonPtr
 
-	repo.Update(equip)
+	err = repo.Update(equip)
+	if err != nil {
+		return
+	}
 
 	c.JSON(200, gin.H{
 		"message": "weights updated",

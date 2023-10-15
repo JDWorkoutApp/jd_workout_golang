@@ -33,7 +33,10 @@ func GenerateTokenWithPayload(u *models.User, payload map[string]interface{}) (s
 }
 
 func GenerateToken(u *models.User) (string, error) {
-	env.Load()
+	err := env.Load()
+	if err != nil {
+		return "", err
+	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"uid":          u.ID,

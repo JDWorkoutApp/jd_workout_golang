@@ -40,7 +40,10 @@ func (fs GinFileStore) Store() (*string, error) {
 
 	storePath := fmt.Sprintf("./public/%s/%s%s", *fs.Path, helper.RandString(10), filepath.Ext(fs.File.Filename))
 
-	gin.SaveUploadedFile(fs.File, storePath)
+	err := gin.SaveUploadedFile(fs.File, storePath)
+	if err != nil {
+		return nil, err
+	}
 
 	path := strings.Replace(storePath, "./public", "", 1)
 
