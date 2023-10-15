@@ -9,10 +9,11 @@ func RandString(length int) string {
 	letters := []rune("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 	b := make([]rune, length)
-    rand.Seed(time.Now().UnixNano())
-    for i := range b {
-        b[i] = letters[rand.Intn(len(letters))]
-    }
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+	for i := range b {
+		b[i] = letters[r.Intn(len(letters))]
+	}
 
-    return string(b)
+	return string(b)
 }

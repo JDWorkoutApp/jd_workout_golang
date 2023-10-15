@@ -2,6 +2,8 @@ package auth
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 	"jd_workout_golang/app/middleware"
 	"jd_workout_golang/app/models"
 	repo "jd_workout_golang/app/repositories/user"
@@ -9,8 +11,6 @@ import (
 	email "jd_workout_golang/lib/Email"
 	helper "jd_workout_golang/lib/helper"
 	"os"
-	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
 )
 
 type ForgetPassword struct {
@@ -65,12 +65,32 @@ func ForgetPasswordAction(c *gin.Context) {
 	user.ResetPassword = 1
 	user.Password = helper.RandString(8)
 
-	sendForgetPassword(user)
+	err = sendForgetPassword(user)
+	if err != nil {
+		c.JSON(422, gin.H{
+			"message": "forget password failed",
+			"error":   err.Error(),
+		})
+
+		c.Abort()
+
+		return
+	}
 
 	hash, _ := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	user.Password = string(hash)
 
-	repo.Update(user)
+	err = repo.Update(user)
+	if err != nil {
+		c.JSON(422, gin.H{
+			"message": "forget password failed",
+			"error":   err.Error(),
+		})
+
+		c.Abort()
+
+		return
+	}
 
 	c.JSON(200, gin.H{
 		"message": "forget password success",
@@ -130,7 +150,17 @@ func ResetPasswordAction(c *gin.Context) {
 	user.Password = string(hash)
 	user.ResetPassword = 0
 
-	repo.Update(user)
+	err := repo.Update(user)
+	if err != nil {
+		c.JSON(422, gin.H{
+			"message": "密碼修改失敗",
+			"error":   err.Error(),
+		})
+
+		c.Abort()
+
+		return
+	}
 
 	token, _ := jwtHelper.GenerateToken(user)
 

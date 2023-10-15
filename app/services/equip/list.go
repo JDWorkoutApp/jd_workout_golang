@@ -154,7 +154,18 @@ func List(c *gin.Context) {
 
 		var arrayWeights []float32
 		if v.Weights != nil {
-			json.Unmarshal([]byte(*v.Weights), &arrayWeights)
+			err := json.Unmarshal([]byte(*v.Weights), &arrayWeights)
+			if err != nil {
+				c.JSON(422, gin.H{
+					"message": "get json parse error",
+					"error": err.Error(),
+				})
+
+				c.Abort()
+
+				return
+			}
+
 		}
 
 		apiFormatEquip := apiFormatEquip{

@@ -36,7 +36,11 @@ func TestUserWithoutToken(t *testing.T) {
 
 	assert.Equal(t, http.StatusUnauthorized, w.Code)
 	// assert.Equal(t, "JWT token is empty", w.Body.String())
-	json.Unmarshal((w.Body.Bytes()), &response)
+	err := json.Unmarshal(w.Body.Bytes(), &response)
+	if err != nil {
+		t.Error(err)
+		return
+	}
 	assert.Equal(t, "JWT token is empty", response.Error)
 }
 
@@ -66,7 +70,12 @@ func TestUserWithInvalidToken(t *testing.T) {
 		}{}
 
 		assert.Equal(t, testCase.status, w.Code)
-		json.Unmarshal((w.Body.Bytes()), &response)
+		err := json.Unmarshal(w.Body.Bytes(), &response)
+		if err != nil {
+			t.Error(err)
+			return
+		}
+
 		assert.Equal(t, testCase.error, response.Error)
 	}
 }

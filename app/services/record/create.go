@@ -58,7 +58,7 @@ func CreateRecord(c *gin.Context) {
 		Note:    createBody.Note,
 	}
 
-	recordRepo.Create(record)
+	_, err = recordRepo.Create(record)
 
 	if err != nil {
 		c.JSON(422, gin.H{
