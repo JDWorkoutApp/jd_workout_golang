@@ -70,3 +70,8 @@ func TestUserWithInvalidToken(t *testing.T) {
 		assert.Equal(t, testCase.error, response.Error)
 	}
 }
+
+func TestTestA(t *testing.T) {
+	testA()
+	assert.True(t, true)
+}
