@@ -1,7 +1,7 @@
 ## Project phases
 
 1. [x] Workout app
-2. [ ] general purpose app
+2. [ ] General purpose app
 
 ## Android Play Store
 
