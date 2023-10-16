@@ -4,3 +4,5 @@ lint:
 	golangci-lint run
 swagger:
 	swag init -g cmd/main.go
+migrate:
+	go run database/migrate.go $(filter-out $@, $(MAKECMDGOALS))
