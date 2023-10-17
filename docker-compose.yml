@@ -11,6 +11,8 @@ services:
       - "${APP_PORT:-80}:80"
     volumes:
       - ./:/app
+    environment:
+      - GO111MODULE=on
   mysql:
       build:
         context: .
