@@ -34,16 +34,17 @@ http://www.govel-workout.com:6002/
 
 Check command in `Makefile`.
 
-## Bash rc for dev
+## Bashrc for dev
 
 ```bash
 alias wolint="docker exec dev_workout_lint_1 golangci-lint run"
 alias woswagger="docker exec dev_workout_app_1 swag init -g cmd/main.go"
 alias wobash="docker exec -it dev_workout_app_1 bash"
 alias wotest="docker exec dev_workout_app_1 make test"
+alias womigrate="docker exec dev_workout_app_1 make migrate"
 alias woair="docker exec dev_workout_app_1 sh -c 'kill \$(lsof -t -i :80) && air'"
 ```
-
+q
 ## Hot reload
 
 use command `air`

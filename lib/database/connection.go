@@ -13,7 +13,7 @@ var Connection *gorm.DB
 
 // InitDatabase 初始化資料庫連線
 // 後續改 singlton
-func InitDatabase() {
+func InitDatabase(dsn string) {
 	config := gorm.Config{}
 	if os.Getenv("LOG_QUERY") == "true" {
 		config = gorm.Config{
@@ -30,7 +30,7 @@ func InitDatabase() {
 
 	db, err := gorm.Open(
 		mysql.New(mysql.Config{
-			DSN: os.Getenv("DB_HOST"),
+			DSN: dsn,
 		}),
 		&config,
 	)

@@ -18,7 +18,7 @@ func main() {
 
 	file.LoadConfigAndEnv()
 
-	database.InitDatabase()
+	database.InitDatabase(os.Getenv("DB_HOST"))
 
 	dispatch(method)
 }

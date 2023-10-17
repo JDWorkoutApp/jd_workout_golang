@@ -61,7 +61,7 @@ func main() {
 
 func init() {
 	file.LoadConfigAndEnv()
-	database.InitDatabase()
+	database.InitDatabase(os.Getenv("DB_HOST"))
 	redis.InitRedis()
 }
 
