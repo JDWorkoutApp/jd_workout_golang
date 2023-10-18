@@ -66,7 +66,7 @@ func TestRegisterSuccess(t *testing.T) {
 
 	r.ServeHTTP(w, req)
 
-	assert.Equal(t, http.StatusOK, w.Code)
+	assert.Equal(t, 999, w.Code)
 
 	response := struct {
 		Message string `json:"message"`
