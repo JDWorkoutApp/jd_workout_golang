@@ -35,7 +35,7 @@ func GetRootDir() string {
 		panic(err)
 	}
 
-	modPath := findGoMod(wd)
+	modPath := findFile(wd, ".env")
 	if modPath != "" {
 		return filepath.Dir(modPath)
 	}
@@ -43,9 +43,9 @@ func GetRootDir() string {
 	panic("root not found")
 }
 
-func findGoMod(dir string) string {
+func findFile(dir string, filename string) string {
 	for {
-		modPath := filepath.Join(dir, "go.mod")
+		modPath := filepath.Join(dir, filename)
 		_, err := os.Stat(modPath)
 		if err == nil {
 			return modPath
@@ -58,5 +58,5 @@ func findGoMod(dir string) string {
 		dir = filepath.Dir(dir)
 	}
 
-	panic("go.mod not found")
+	panic("file not found")
 }
