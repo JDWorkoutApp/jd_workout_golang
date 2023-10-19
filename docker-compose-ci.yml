@@ -27,9 +27,7 @@ services:
       MYSQL_USER: test
       MYSQL_PASSWORD: test
   redis:
-    build:
-      context: .
-      dockerfile: ./docker/redis/DockerfileCI
+    image: ghcr.io/jdworkoutapp/jd_workout_golang_redis:testing
     ports:
       - "6379:6379"
     volumes:
