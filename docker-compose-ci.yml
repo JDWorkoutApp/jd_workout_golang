@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   app:
-    image: ghcr.io/jdworkoutapp/jd_workout_golang:latest
+    image: ghcr.io/jdworkoutapp/jd_workout_golang:testing
     tty: true
     stdin_open: true
     ports:
@@ -16,7 +16,7 @@ services:
       WAIT_HOSTS: mysql:3306
         - GO111MODULE=on
   mysql:
-    image: ghcr.io/jdworkoutapp/jd_workout_golang_mysql:latest
+    image: ghcr.io/jdworkoutapp/jd_workout_golang_mysql:testing
     ports:
       - "3306:3306"
     volumes:
