@@ -38,3 +38,4 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD:-password}
 volumes:
   mysql_data:
+  redis_data:
