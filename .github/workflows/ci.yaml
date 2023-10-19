@@ -78,6 +78,6 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.out
+          file: /app/ci_test_jd_workout/coverage.out
           fail_ci_if_error: true
           verbose: true
