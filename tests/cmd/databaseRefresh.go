@@ -14,7 +14,7 @@ func main() {
 		panic(err)
 	}
 
-	originDs := os.Getenv("DB_HOST")
+	originDs := os.Getenv("DB_TEST_DSN_DEFAULT")
 	database.InitDatabase(originDs)
 	database.Connection.Exec("CREATE DATABASE IF NOT EXISTS jd_workout_test;")
 
