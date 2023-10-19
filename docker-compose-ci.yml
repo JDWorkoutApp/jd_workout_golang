@@ -22,7 +22,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: test
       MYSQL_DATABASE: jd_workout
       MYSQL_USER: jd
       MYSQL_PASSWORD: test
