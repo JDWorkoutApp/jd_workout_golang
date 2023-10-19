@@ -8,7 +8,7 @@ import (
 
 func ApiRateLimit(c *gin.Context) {
 
-	err := redis.ApiRateLimit(c) 
+	err := redis.ApiRateLimit(c)
 
 	if err != nil {
 		c.JSON(http.StatusTooManyRequests, gin.H{
