@@ -24,7 +24,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: jd_workout
-      MYSQL_USER: test
+      MYSQL_USER: jd
       MYSQL_PASSWORD: test
   redis:
     image: ghcr.io/jdworkoutapp/jd_workout_golang_redis:testing
