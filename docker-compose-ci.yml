@@ -11,6 +11,7 @@ services:
       - ./.env:/app/.env
       - ./credentials.json:/app/credential/google/credentials.json
       - ./public/images:/app/public/images
+      - ./coverage.out:/app/coverage.out
     environment:
       WAIT_HOSTS: mysql:3306
         - GO111MODULE=on
