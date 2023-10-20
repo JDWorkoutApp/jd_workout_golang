@@ -44,7 +44,7 @@ alias wotest="docker exec dev_workout_app_1 make test"
 alias womigrate="docker exec dev_workout_app_1 make migrate"
 alias woair="docker exec dev_workout_app_1 sh -c 'kill \$(lsof -t -i :80) && air'"
 ```
-q
+
 ## Hot reload
 
 use command `air`
