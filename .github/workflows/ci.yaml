@@ -65,15 +65,12 @@ jobs:
         run: |
           cp .env.example .env
           touch coverage.out
-          cat .env
       - name: docker up
         run: |
           docker-compose -f docker-compose-ci.yml up -d
-          sleep 30
           docker ps
       - name: docker test
         run: |
-          docker-compose -f docker-compose-ci.yml exec -T app cat tests/cmd/databaseRefresh.go
           docker-compose -f docker-compose-ci.yml exec -T app make test
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
