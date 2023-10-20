@@ -16,5 +16,5 @@ func TestApiRateLimit(t *testing.T) {
 	ApiRateLimit(c)
 
 	//todo fake test for coverage
-	assert.Equal(t, http.StatusTooManyRequests, 429)
+	assert.Equal(t, 400, 429)
 }
