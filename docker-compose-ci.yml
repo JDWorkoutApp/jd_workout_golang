@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   app:
-    image: ghcr.io/jdworkoutapp/jd_workout_golang:latest
+    image: ghcr.io/jdworkoutapp/jd_workout_golang:testing
     tty: true
     stdin_open: true
     ports:
@@ -11,24 +11,23 @@ services:
       - ./.env:/app/.env
       - ./credentials.json:/app/credential/google/credentials.json
       - ./public/images:/app/public/images
+      - ./coverage.out:/app/coverage.out
     environment:
       WAIT_HOSTS: mysql:3306
         - GO111MODULE=on
   mysql:
-    image: ghcr.io/jdworkoutapp/jd_workout_golang_mysql:latest
+    image: ghcr.io/jdworkoutapp/jd_workout_golang_mysql:testing
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: test
       MYSQL_DATABASE: jd_workout
-      MYSQL_USER: test
+      MYSQL_USER: jd
       MYSQL_PASSWORD: test
   redis:
-    build:
-      context: .
-      dockerfile: ./docker/redis/DockerfileCI
+    image: ghcr.io/jdworkoutapp/jd_workout_golang_redis:testing
     ports:
       - "6379:6379"
     volumes:
@@ -37,3 +36,4 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD:-password}
 volumes:
   mysql_data:
+  redis_data:

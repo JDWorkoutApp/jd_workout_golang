@@ -59,20 +59,26 @@ jobs:
     needs: push-testing-image
     runs-on: ubuntu-latest
     steps:
-      - name: Pull image and deploy, and test
-        uses: appleboy/ssh-action@v0.1.8
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
-          key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-          port: ${{ secrets.DEPLOY_PORT }}
-          script: |
-            export PROCESS_TYPE=cd && 
-            cd /app/ci_test_jd_workout && 
-            docker-compose pull && 
-            docker-compose up -d && 
-            docker image prune -f &&
-            docker-compose exec -T app make test
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: file build
+        run: |
+          cp .env.example .env
+          touch coverage.out
+          cat .env
+      - name: docker up
+        run: |
+          docker-compose -f docker-compose-ci.yml up -d
+          sleep 30
+          docker ps
+      - name: docker test
+        run: |
+          docker-compose -f docker-compose-ci.yml exec -T app cat tests/cmd/databaseRefresh.go
+          docker-compose -f docker-compose-ci.yml exec -T app make test
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.out
+          fail_ci_if_error: true
+          verbose: true
